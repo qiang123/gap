@@ -79,7 +79,7 @@ if ARCH_IS_WINDOWS() then
       winfilename:=MakeExternalFilename( SplitString( filename, "#" )[1] );
     fi;
     Print( "Opening help page ", winfilename, " in default windows browser ... \c" );
-    Exec( Concatenation("start ", winfilename ) );
+    Exec2( "start", winfilename );
     Print( "done! \n" );         
   end
   );
@@ -137,7 +137,7 @@ elif ARCH_IS_MAC_OS_X() then
             fi;
             file := file.file;
           fi;
-          Exec(Concatenation("open -a Preview ", file));
+          Exec2("open", "-a", "Preview", file);
           Print("#  see page ", page, " in the Preview window.\n");
         end
     );
@@ -154,7 +154,7 @@ elif ARCH_IS_MAC_OS_X() then
             fi;
             file := file.file;
           fi;
-          Exec(Concatenation("open -a \"Adobe Reader\" ", file));
+          Exec2("open", "-a", "Adobe Reader", file);
           Print("#  see page ", page, " in the Adobe Reader window.\n");
         end
     );
@@ -171,7 +171,7 @@ elif ARCH_IS_MAC_OS_X() then
             fi;
             file := file.file;
           fi;
-          Exec(Concatenation("open ", file));
+          Exec2("open ", file);
           Print("#  see page ", page, " in the pdf viewer window.\n");
         end
     );
@@ -186,15 +186,15 @@ elif ARCH_IS_MAC_OS_X() then
                 fi;
                 file := file.file;
             fi;
-            Exec( Concatenation(    
-                "osascript <<ENDSCRIPT\n",
-                    "tell application \"Skim\"\n",
-                    "activate\n",
-                    "open \"", file, "\"\n",
-                    "set theDoc to document of front window\n",
-                    "go theDoc to page ",String(page)," of theDoc\n",
-                    "end tell\n",
-                "ENDSCRIPT\n" ) );
+            Exec2("osascript",
+                InputTextString(Concatenation("""
+                    tell application "Skim"
+                    activate
+                    open """, ViewString(file), """
+                    set theDoc to document of front window
+                    go theDoc to page """,String(page),""" of theDoc
+                    end tell
+                """)));
             return;
         end
     );
@@ -206,17 +206,20 @@ else # UNIX but not macOS
     HELP_VIEWER_INFO.browser := rec(
     type := "url",
     show := function( url )
+      local str;
+      str := "";
+      Exec2("wslpath", "-a", "-w", url, OutputTextString(str, false));
       # Ignoring part of the URL after '#' since we are unable
       # to navigate to the precise location on Windows
       url := SplitString( url, "#" )[1];
-      Exec(Concatenation("explorer.exe \"$(wslpath -a -w \"",url, "\")\""));
+      Exec2("explorer.exe", str);
     end
     );
 
     HELP_VIEWER_INFO.("pdf viewer") := rec(
         type := "pdf",
         show := function(file)
-          local   page;
+          local   page, str;
           # unfortunately one cannot (yet?) give a start page to windows
           page := 1;
           if IsRecord(file) then
@@ -225,7 +228,10 @@ else # UNIX but not macOS
             fi;
             file := file.file;
           fi;
-          Exec(Concatenation("explorer.exe \"$(wslpath -a -w \"",file, "\")\""));
+
+          str := "";
+          Exec2("wslpath", "-a", "-w", url, OutputTextString(str, false));
+          Exec2("explorer.exe", str);
           Print("#  see page ", page, " in PDF.\n");
     end
     );
@@ -234,7 +240,7 @@ else # UNIX but not macOS
     HELP_VIEWER_INFO.netscape := rec(
     type := "url",
     show := function(url)
-      Exec(Concatenation("netscape -remote \"openURL(file:", url, ")\""));
+      Exec2("netscape", "-remote", Concatenation("openURL(file:", url, ")"));
     end
     );
 
@@ -242,7 +248,7 @@ else # UNIX but not macOS
     HELP_VIEWER_INFO.mozilla := rec(
     type := "url",
     show := function(url)
-      Exec(Concatenation("mozilla -remote \"openURL(file:", url, ")\""));
+      Exec2("mozilla", "-remote", Concatenation("openURL(file:", url, ")"));
     end
     );
 
@@ -275,7 +281,7 @@ else # UNIX but not macOS
   HELP_VIEWER_INFO.lynx := rec(
   type := "url",
   show := function(url)
-    Exec(Concatenation("lynx \"", url, "\""));
+    Exec2("lynx", url);
   end
   );
 
@@ -283,28 +289,28 @@ else # UNIX but not macOS
   HELP_VIEWER_INFO.w3m := rec(
   type := "url",
   show := function(url)
-    Exec(Concatenation("w3m \"", url, "\""));
+    Exec2("w3m", url);
   end
   );
 
   HELP_VIEWER_INFO.elinks := rec(
   type := "url",
   show := function(url)
-    Exec(Concatenation("elinks \"", url, "\""));
+    Exec2("elinks", url);
   end
   );
 
   HELP_VIEWER_INFO.links2ng := rec(
   type := "url",
   show := function(url)
-    Exec(Concatenation("links2 \"", url, "\""));
+    Exec2("links2", url);
   end
   );
 
   HELP_VIEWER_INFO.links2 := rec(
   type := "url",
   show := function(url)
-    Exec(Concatenation("links2 -g \"", url, "\""));
+    Exec2("links2", "-g", url);
   end
   );
 fi;
