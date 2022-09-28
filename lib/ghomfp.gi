@@ -720,9 +720,9 @@ end);
 
 #############################################################################
 ##
-#M  PreImagesRepresentative
+#M  PreImagesRepresentativeNC
 ##
-InstallMethod( PreImagesRepresentative,
+InstallMethod( PreImagesRepresentativeNC,
   "hom. to standard generators of fp group, using 'MappedWord'",
   FamRangeEqFamElm,
   [IsToFpGroupHomomorphismByImages,IsMultiplicativeElementWithInverse],

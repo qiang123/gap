@@ -555,9 +555,9 @@ InstallMethod( ImagesRepresentative,
 
 #############################################################################
 ##
-#M  PreImagesRepresentative( <map>, <elm> ) . . . . . .  for algebra g.m.b.i.
+#M  PreImagesRepresentativeNC( <map>, <elm> ) . . . . .  for algebra g.m.b.i.
 ##
-InstallMethod( PreImagesRepresentative,
+InstallMethod( PreImagesRepresentativeNC,
     "for algebra g.m.b.i., and element",
     FamRangeEqFamElm,
     [ IsGeneralMapping and IsAlgebraGeneralMappingByImagesDefaultRep,
@@ -567,7 +567,7 @@ InstallMethod( PreImagesRepresentative,
                                     elm );
     end );
 
-InstallMethod( PreImagesRepresentative,
+InstallMethod( PreImagesRepresentativeNC,
     "for algebra g.m.b.i. knowing inverse, and element",
     FamRangeEqFamElm,
     [ IsGeneralMapping and IsAlgebraGeneralMappingByImagesDefaultRep
@@ -893,7 +893,7 @@ InstallMethod( ImagesRepresentative,
 
 #############################################################################
 ##
-#M  PreImagesRepresentative( <ophom>, <mat> )
+#M  PreImagesRepresentativeNC( <ophom>, <mat> )
 ##
 PreImagesRepresentativeOperationAlgebraHomomorphism := function( ophom, mat )
     if not IsBound( ophom!.basisImage ) then
@@ -906,7 +906,7 @@ PreImagesRepresentativeOperationAlgebraHomomorphism := function( ophom, mat )
     return mat;
 end;
 
-InstallMethod( PreImagesRepresentative,
+InstallMethod( PreImagesRepresentativeNC,
     "for an operation algebra homomorphism, and an element",
     FamRangeEqFamElm,
     [ IsOperationAlgebraHomomorphismDefaultRep, IsMatrix ],
@@ -1068,9 +1068,9 @@ InstallMethod( ImagesRepresentative,
 
 #############################################################################
 ##
-#M  PreImagesRepresentative( <ophom>, <mat> )
+#M  PreImagesRepresentativeNC( <ophom>, <mat> )
 ##
-InstallMethod( PreImagesRepresentative,
+InstallMethod( PreImagesRepresentativeNC,
     "for an alg. hom. from f. p. algebra, and an element",
     FamRangeEqFamElm,
     [ IsAlgebraHomomorphismFromFpRep, IsMatrix ],

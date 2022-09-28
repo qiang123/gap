@@ -1038,6 +1038,8 @@ DeclareOperation( "PreImageElm",
 ##
 DeclareOperation( "PreImagesRepresentative",
     [ IsGeneralMapping, IsObject ] );
+DeclareOperation( "PreImagesRepresentativeNC",
+    [ IsGeneralMapping, IsObject ] );
 
 
 #############################################################################
