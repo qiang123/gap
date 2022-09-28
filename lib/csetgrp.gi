@@ -199,7 +199,7 @@ local cla,clb,i,j,k,imgs,bd,r,rep,b2,ex2,split,dc,
     r:=SmallerDegreePermutationRepresentation(b:cheap);
     k:=Image(r,b);
     gens:=MorFindGeneratingSystem(k,MorMaxFusClasses(MorRatClasses(k)));
-    gens:=List(gens,x->PreImagesRepresentative(r,x));
+    gens:=List(gens,x->PreImagesRepresentativeNC(r,x));
   else
     gens:=MorFindGeneratingSystem(b,MorMaxFusClasses(MorRatClasses(b)));
   fi;

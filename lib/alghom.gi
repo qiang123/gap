@@ -563,8 +563,8 @@ InstallMethod( PreImagesRepresentativeNC,
     [ IsGeneralMapping and IsAlgebraGeneralMappingByImagesDefaultRep,
       IsObject ],
     function( map, elm )
-    return PreImagesRepresentative( AsLeftModuleGeneralMappingByImages(map),
-                                    elm );
+    return PreImagesRepresentativeNC( AsLeftModuleGeneralMappingByImages(map),
+                                      elm );
     end );
 
 InstallMethod( PreImagesRepresentativeNC,
@@ -893,7 +893,7 @@ InstallMethod( ImagesRepresentative,
 
 #############################################################################
 ##
-#M  PreImagesRepresentativeNC( <ophom>, <mat> )
+#M  PreImagesRepresentativeOperationAlgebraHomomorphism( <ophom>, <mat> )
 ##
 PreImagesRepresentativeOperationAlgebraHomomorphism := function( ophom, mat )
     if not IsBound( ophom!.basisImage ) then

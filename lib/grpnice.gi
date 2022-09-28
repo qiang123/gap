@@ -65,7 +65,7 @@ function( grp )
     local   nice;
     nice := NiceMonomorphism(grp);
     return List( GeneratorsOfGroup(NiceObject(grp)),
-                 x -> PreImagesRepresentative(nice,x) );
+                 x -> PreImagesRepresentativeNC(nice,x) );
 end );
 
 
@@ -80,7 +80,7 @@ function( grp )
     local   nice;
     nice := NiceMonomorphism(grp);
     return List( SmallGeneratingSet(NiceObject(grp)),
-                 x -> PreImagesRepresentative(nice,x) );
+                 x -> PreImagesRepresentativeNC(nice,x) );
 end );
 
 
@@ -95,7 +95,7 @@ function( grp )
     local   nice;
     nice := NiceMonomorphism(grp);
     return List( MinimalGeneratingSet(NiceObject(grp)),
-                 x -> PreImagesRepresentative(nice,x) );
+                 x -> PreImagesRepresentativeNC(nice,x) );
 end );
 
 
@@ -236,7 +236,7 @@ function( elm, G )
     nice := NiceMonomorphism( G );
     img  := ImagesRepresentative( nice, elm:actioncanfail:=true );
     return img<>fail and img in NiceObject( G )
-       and PreImagesRepresentative( nice, img ) = elm;
+       and PreImagesRepresentativeNC( nice, img ) = elm;
 end );
 
 
@@ -311,7 +311,7 @@ function( obj1, obj2 )
     img  := ImagesRepresentative( nice, obj2:actioncanfail:=true );
     if img = fail or 
       not (img in ImagesSource(nice) and
-	PreImagesRepresentative(nice,img)=obj2) then
+	PreImagesRepresentativeNC(nice,img)=obj2) then
 	TryNextMethod();
     fi;
     no:=NiceObject(obj1);
@@ -371,7 +371,7 @@ local mon,cl,clg,c,i;
   cl:=ConjugacyClasses(NiceObject(g));
   clg:=[];
   for i in cl do
-    c:=ConjugacyClass(g,PreImagesRepresentative(mon,Representative(i)));
+    c:=ConjugacyClass(g,PreImagesRepresentativeNC(mon,Representative(i)));
     c!.niceClass:=i;
     if HasStabilizerOfExternalSet(i) then
       SetStabilizerOfExternalSet(c,PreImages(mon,StabilizerOfExternalSet(i)));
@@ -812,7 +812,7 @@ SubgroupMethodByNiceMonomorphism( SolvableRadical,
 InstallMethodWithRandomSource( Random,
     "for a random source and a group handled by nice monomorphism",
     [ IsRandomSource, IsGroup and IsHandledByNiceMonomorphism ], 0,
-    {rs, G} -> PreImagesRepresentative( NiceMonomorphism( G ),
+    {rs, G} -> PreImagesRepresentativeNC( NiceMonomorphism( G ),
                                   Random( rs, NiceObject( G ) ) ) );
 
 
@@ -828,7 +828,7 @@ local mon,cl,clg,c,i;
    cl:=RationalClasses(NiceObject(g));
    clg:=[];
    for i in cl do
-     c:=RationalClass(g,PreImagesRepresentative(mon,Representative(i)));
+     c:=RationalClass(g,PreImagesRepresentativeNC(mon,Representative(i)));
      if HasStabilizerOfExternalSet(i) then
        SetStabilizerOfExternalSet(c,PreImages(mon,StabilizerOfExternalSet(i)));
      fi;
@@ -851,7 +851,7 @@ function(g,u)
 local mon,rt;
    mon:=NiceMonomorphism(g);
    rt:=RightTransversal(ImagesSet(mon,g),ImagesSet(mon,u));
-   rt:=List(rt,i->RightCoset(u,PreImagesRepresentative(mon,i)));
+   rt:=List(rt,i->RightCoset(u,PreImagesRepresentativeNC(mon,i)));
    return rt;
 end);
 
@@ -923,7 +923,7 @@ local hom,rep;
   rep:= RepresentativeAction( NiceObject( G ),
             ImageElm( hom, a ), ImageElm( hom, b ), OnPoints );
   if rep<>fail then
-    rep:=PreImagesRepresentative(hom,rep);
+    rep:=PreImagesRepresentativeNC(hom,rep);
   fi;
   return rep;
 end);
@@ -1010,7 +1010,7 @@ local p, tmp;
   # avoid the double dispatch for `AsGroupGeneralMappingByImages'
   tmp := RUN_IN_GGMBI;
    RUN_IN_GGMBI:=true;
-  p:=PreImagesRepresentative( AsGroupGeneralMappingByImages( hom ), elm );
+  p:=PreImagesRepresentativeNC( AsGroupGeneralMappingByImages( hom ), elm );
   RUN_IN_GGMBI:=tmp;
   return p;
 end );
@@ -1105,7 +1105,7 @@ InstallMethod( \[\],"enum-by-niceo", true,
 function( enum, pos )
 local img;
   img:=enum!.niceEnumerator[pos];
-  return PreImagesRepresentative(enum!.morphism,img);
+  return PreImagesRepresentativeNC(enum!.morphism,img);
 end);
 
 

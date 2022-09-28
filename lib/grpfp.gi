@@ -312,7 +312,7 @@ local fam,hom;
   if hom=fail then
      TryNextMethod(); 
   fi;
-  return PreImagesRepresentative(hom,Random(rs, Image(hom,gp)));
+  return PreImagesRepresentativeNC(hom,Random(rs, Image(hom,gp)));
 end );
 
 #############################################################################
@@ -5415,7 +5415,7 @@ local G,T,gens,g,reps,ng,index,i,j,ndef,n,iso;
 	subgroup := U,
 	iso:=iso,
 	table:=T,
-	reps:=List(reps,i->PreImagesRepresentative(iso,i))));
+	reps:=List(reps,i->PreImagesRepresentativeNC(iso,i))));
   fi;
 
   ndef := 1;
@@ -5435,7 +5435,7 @@ local G,T,gens,g,reps,ng,index,i,j,ndef,n,iso;
 	      subgroup := U,
 	      iso:=iso,
 	      table:=T,
-	      reps:=List(reps,i->PreImagesRepresentative(iso,i))));
+	      reps:=List(reps,i->PreImagesRepresentativeNC(iso,i))));
 	fi;
       fi;
     od;

@@ -629,7 +629,7 @@ local gens,s,dom,mon,no;
   # call the recursive function to do the work
   gens:= SCMinSmaGens( no, s, [], One( no ), true ).gens;
   SetMinimalStabChain(G,s);
-  return List(gens,i->PreImagesRepresentative(mon,i));
+  return List(gens,i->PreImagesRepresentativeNC(mon,i));
 end);
 
 #############################################################################
@@ -666,7 +666,7 @@ local s,dom,mon, img;
 				      i->Position(HomeEnumerator(dom),i))));
   # call the recursive function to do the work
   s:= LargestElementStabChain( s, One( img ) );
-  return PreImagesRepresentative(mon,s);
+  return PreImagesRepresentativeNC(mon,s);
 end);
 
 #############################################################################
@@ -705,7 +705,7 @@ local mon,dom,S,o,oimgs,p,i,g;
     od;
 
     # change by corresponding matrix element
-    e:=PreImagesRepresentative(mon,g)*e;
+    e:=PreImagesRepresentativeNC(mon,g)*e;
 
     S:=S.stabilizer;
   od;
