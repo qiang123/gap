@@ -2880,7 +2880,7 @@ local   G,  D,  d,  e,  gens,  acts,  act,  xset,  hom,  p,  rep;
       rep := RepresentativeActionOp( ImagesSource( hom ), d, e,
 		      OnPoints );
       if rep <> fail  then
-	rep := PreImagesRepresentative( hom, rep );
+	rep := PreImagesRepresentativeNC( hom, rep );
       fi;
       return rep;
     elif IsBound( D )  then
