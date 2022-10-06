@@ -2666,7 +2666,7 @@ function(G,p,e)
 local f;
   f:=MaximalAbelianQuotient(G);
   IsAbelian(Image(f));
-  return SubgroupByPcgs(G,Pcgs(PreImagesSet(f,Omega(Image(f),p,e))));
+  return SubgroupByPcgs(G,Pcgs(PreImagesSetNC(f,Omega(Image(f),p,e))));
 end);
 
 # Efficiency notes:
@@ -2699,7 +2699,7 @@ local z,f;
 
   f:=NaturalHomomorphismByNormalSubgroup(G,Subgroup(G,[z]));
   IsAbelian(Image(f)); # Probably is not, but quick to check
-  return SubgroupByPcgs(G,Pcgs(PreImagesSet(f,Omega(Image(f),p,e))));
+  return SubgroupByPcgs(G,Pcgs(PreImagesSetNC(f,Omega(Image(f),p,e))));
 end);
 
 # Efficiency Points:
@@ -2840,7 +2840,7 @@ InstallMethod (HallSubgroupOp, "via IsomoprhismPcGroup", true,
     function (grp, pi)
         local iso;
         iso := IsomorphismPcGroup (grp);
-        return PreImagesSet (iso, HallSubgroup (ImagesSource (iso), pi));
+        return PreImagesSetNC(iso, HallSubgroup (ImagesSource (iso), pi));
     end);
     
     
@@ -2861,7 +2861,7 @@ InstallMethod (SylowComplementOp, "via IsomoprhismPcGroup", true,
     function (grp, p)
         local iso;
         iso := IsomorphismPcGroup (grp);
-        return PreImagesSet (iso, SylowComplement (ImagesSource (iso), p));
+        return PreImagesSetNC(iso, SylowComplement (ImagesSource (iso), p));
     end);
     
 

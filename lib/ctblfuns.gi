@@ -2052,8 +2052,8 @@ InstallMethod( InertiaSubgroup,
     if stab = permgrp then
       return G;
     else
-      return PreImagesSet( GroupHomomorphismByImages( G, permgrp,
-                               GeneratorsOfGroup( G ), perms ),
+      return PreImagesSetNC( GroupHomomorphismByImages( G, permgrp,
+                                 GeneratorsOfGroup( G ), perms ),
                  stab );
     fi;
     end );

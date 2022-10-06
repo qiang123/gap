@@ -1903,9 +1903,9 @@ InstallMethod( PreImagesElm,
 
 #############################################################################
 ##
-#M  PreImagesSet( <aut>, <field> )  . . . . . for autom. of ab. number fields
+#M  PreImagesSetNC( <aut>, <field> )  . . . . for autom. of ab. number fields
 ##
-InstallMethod( PreImagesSet,
+InstallMethod( PreImagesSetNC,
     "for ANF automorphism and scalar",
     CollFamRangeEqFamElms,
     [ IsFieldHomomorphism and IsANFAutomorphismRep, IsField ],
