@@ -906,7 +906,7 @@ PreImagesRepresentativeOperationAlgebraHomomorphism := function( ophom, mat )
     return mat;
 end;
 
-InstallMethod( PreImagesRepresentative,
+InstallMethod( PreImagesRepresentativeNC,
     "for an operation algebra homomorphism, and an element",
     FamRangeEqFamElm,
     [ IsOperationAlgebraHomomorphismDefaultRep, IsMatrix ],
@@ -1068,7 +1068,7 @@ InstallMethod( ImagesRepresentative,
 
 #############################################################################
 ##
-#M  PreImagesRepresentative( <ophom>, <mat> )
+#M  PreImagesRepresentativeNC( <ophom>, <mat> )
 ##
 InstallMethod( PreImagesRepresentativeNC,
     "for an alg. hom. from f. p. algebra, and an element",
