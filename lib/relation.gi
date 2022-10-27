@@ -1943,7 +1943,7 @@ InstallMethod( ImagesElm,
 #M  PreImagesElmNC( <rel>, <elm> )   for equivalence relations with partition
 ##
 InstallMethod( PreImagesElmNC, 
-        "equivalence relations with parition and element", 
+        "equivalence relations with partition and element", 
         FamRangeEqFamElm,
         [IsEquivalenceRelation and HasEquivalenceRelationPartition, 
          IsObject],0,
